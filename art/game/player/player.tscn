@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddydomtlhktmd"]
+
+[ext_resource type="Script" path="res://game/player/player.gd" id="1_eqhh2"]
+[ext_resource type="Texture2D" uid="uid://d3qwmicvvooym" path="res://art/Ninja Adventure - Asset Pack/Actor/Characters/NinjaGreen/SpriteSheet.png" id="1_uw2yd"]
+[ext_resource type="Script" path="res://game/player/Camera2D.gd" id="3_iobjx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_if0ph"]
+size = Vector2(15, 15)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_eqhh2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_if0ph")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uw2yd")
+hframes = 4
+vframes = 7
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.8, 2.8)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+script = ExtResource("3_iobjx")
