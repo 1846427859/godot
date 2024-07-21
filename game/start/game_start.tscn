@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6ncymqkk5xim"]
+
+[ext_resource type="Script" path="res://game/start/start.gd" id="1_if6vr"]
+[ext_resource type="AudioStream" uid="uid://dan5q3qrkwwe7" path="res://art/Ninja Adventure - Asset Pack/Musics/1 - Adventure Begin.ogg" id="1_tdrns"]
+[ext_resource type="Script" path="res://game/start/exit.gd" id="2_e6ft4"]
+[ext_resource type="Script" path="res://game/start/bg_audio.gd" id="2_vmmmc"]
+
+[node name="game_start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="start" type="Button" parent="CenterContainer/GridContainer"]
+layout_mode = 2
+text = "开始游戏"
+script = ExtResource("1_if6vr")
+
+[node name="exit" type="Button" parent="CenterContainer/GridContainer"]
+layout_mode = 2
+text = "退出游戏"
+script = ExtResource("2_e6ft4")
+
+[node name="bg_audio" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(1.01422, 0.987654)
+stream = ExtResource("1_tdrns")
+autoplay = true
+script = ExtResource("2_vmmmc")
+
+[connection signal="pressed" from="CenterContainer/GridContainer/start" to="CenterContainer/GridContainer/start" method="_on_pressed"]
+[connection signal="pressed" from="CenterContainer/GridContainer/exit" to="CenterContainer/GridContainer/exit" method="_on_pressed"]
+[connection signal="finished" from="bg_audio" to="bg_audio" method="_on_finished"]
