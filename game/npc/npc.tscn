@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://bdnsgo42nn85b"]
+
+[ext_resource type="Texture2D" uid="uid://b766jw53jmm8p" path="res://art/Ninja Adventure - Asset Pack/Actor/Characters/Lion/SpriteSheet.png" id="1_52akf"]
+[ext_resource type="Script" path="res://game/npc/chat_area.gd" id="3_5a358"]
+[ext_resource type="Texture2D" uid="uid://boopcwm4mbpow" path="res://art/Ninja Adventure - Asset Pack/Ui/Dialog/DialogInfo.png" id="4_8m5yc"]
+[ext_resource type="Texture2D" uid="uid://b774hue6yh7hj" path="res://art/Ninja Adventure - Asset Pack/Ui/Dialog/DialogueBoxSimple.png" id="5_nip6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55pou"]
+size = Vector2(16, 15)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ekcw"]
+radius = 17.0294
+
+[sub_resource type="Animation" id="Animation_us3q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g2cg0"]
+resource_name = "chat"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_soxul"]
+_data = {
+"RESET": SubResource("Animation_us3q2"),
+"chat": SubResource("Animation_g2cg0")
+}
+
+[node name="npc" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_52akf")
+hframes = 4
+vframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_55pou")
+
+[node name="chat_area" type="Area2D" parent="."]
+script = ExtResource("3_5a358")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chat_area"]
+shape = SubResource("CircleShape2D_6ekcw")
+
+[node name="no_chat" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, -14)
+scale = Vector2(0.6875, 0.6875)
+texture = ExtResource("4_8m5yc")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="no_chat"]
+libraries = {
+"": SubResource("AnimationLibrary_soxul")
+}
+autoplay = "chat"
+
+[node name="chatting" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2.27374e-13, -16.75)
+scale = Vector2(0.216667, 0.275)
+texture = ExtResource("5_nip6a")
+
+[node name="Label" type="Label" parent="chatting"]
+offset_left = -148.0
+offset_top = -22.0
+offset_right = 147.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "你好，游戏玩家，我是你的新手指导员。"
+autowrap_mode = 1
+
+[connection signal="body_entered" from="chat_area" to="chat_area" method="_on_body_entered"]
+[connection signal="body_exited" from="chat_area" to="chat_area" method="_on_body_exited"]

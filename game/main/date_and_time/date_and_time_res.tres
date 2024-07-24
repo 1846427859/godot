@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="date_and_time_res" load_steps=2 format=3 uid="uid://bdac8lai4xlfb"]
+[gd_resource type="Resource" script_class="date_and_time_res" load_steps=2 format=3 uid="uid://bn1rjkmtsukfx"]
 
 [ext_resource type="Script" path="res://game/main/date_and_time/date_and_time_res.gd" id="1_fsm41"]
 
 [resource]
 script = ExtResource("1_fsm41")
-d = 1
-h = 17
-m = 5
-s = 18
-game_time = 18.75
-game_time_total = 161.25
+d = 2
+h = 16
+m = 25
+s = 46
+game_time = 46.8859
+game_time_total = 254.341
 time_scale = 75

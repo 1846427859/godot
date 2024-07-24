@@ -12,6 +12,8 @@ var time_scale
 
 const date_and_time_res = preload("res://game/main/date_and_time/date_and_time_res.tres")
 
+@onready var label = $CanvasLayer/Label
+
 func _ready():
 	d = date_and_time_res.d
 	h = date_and_time_res.h
@@ -44,7 +46,8 @@ func _process(delta):
 		h_s = "0" + str(h)
 	if m < 10:
 		m_s = "0" + str(m)
-	print("第%s天 %s:%s" % [d, h_s, m_s])
+	#print("第%s天 %s:%s" % [d, h_s, m_s])
+	label.text = "第%s天 %s:%s" % [d, h_s, m_s]
 
 func _exit_tree():
 	date_and_time_res.d = d

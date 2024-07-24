@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://byhfl2v7vj551"]
+[gd_scene load_steps=14 format=3 uid="uid://byhfl2v7vj551"]
 
-[ext_resource type="Script" path="res://game/main/date_and_time/date_and_time.gd" id="1_7vno8"]
 [ext_resource type="Script" path="res://game/main/main_bg_audio/main_bg_audio.gd" id="2_dc3n2"]
 [ext_resource type="Texture2D" uid="uid://bas076qmkm3l8" path="res://art/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="3_bk1si"]
+[ext_resource type="Texture2D" uid="uid://bbfg4280vop2f" path="res://art/FREE Textures Of Light/256x256/256x256 textures (63).png" id="4_cvr5v"]
 [ext_resource type="Texture2D" uid="uid://b8b2golqgevdf" path="res://art/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="4_m4tho"]
 [ext_resource type="PackedScene" uid="uid://ddydomtlhktmd" path="res://game/player/player.tscn" id="5_i0pkx"]
 [ext_resource type="PackedScene" uid="uid://dcrkosqgqtv0l" path="res://game/settings/game_settings.tscn" id="6_7x0qe"]
 [ext_resource type="PackedScene" uid="uid://dweem1xytvacn" path="res://game/sun/sun.tscn" id="7_fma41"]
+[ext_resource type="PackedScene" uid="uid://c13x6sxe1i5s4" path="res://game/main/date_and_time/date_and_time.tscn" id="7_ysqvs"]
+[ext_resource type="PackedScene" uid="uid://bdnsgo42nn85b" path="res://game/npc/npc.tscn" id="9_j6dwj"]
+[ext_resource type="PackedScene" uid="uid://kmvgd7v3sxl7" path="res://game/items/box/box.tscn" id="10_4aa5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4msrw"]
 texture = ExtResource("3_bk1si")
@@ -1126,9 +1129,6 @@ sources/1 = SubResource("TileSetAtlasSource_nbpba")
 
 [node name="main" type="Node2D"]
 
-[node name="date_and_time" type="Node2D" parent="."]
-script = ExtResource("1_7vno8")
-
 [node name="main_bg_audio" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("2_dc3n2")
 
@@ -1140,12 +1140,24 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 1, 65536, 65536, 1, 131072, 65536
 layer_1/name = "1"
 layer_1/tile_data = PackedInt32Array(1114145, 1, 0, 1179681, 1, 1, 1245217, 1, 2, 1114146, 65537, 0, 1179682, 65537, 1, 1245218, 65537, 2, 1114147, 131073, 0, 1179683, 131073, 1, 1245219, 131073, 2, 1114148, 196609, 0, 1179684, 196609, 1, 1245220, 196609, 2)
 
+[node name="PointLight2D" type="PointLight2D" parent="TileMap"]
+visible = false
+position = Vector2(561, 296)
+texture = ExtResource("4_cvr5v")
+
 [node name="player" parent="." instance=ExtResource("5_i0pkx")]
-position = Vector2(559, 346)
+position = Vector2(552, 360)
 
 [node name="game_settings" parent="." instance=ExtResource("6_7x0qe")]
 
 [node name="sun" parent="." instance=ExtResource("7_fma41")]
-visible = true
+
+[node name="date_and_time" parent="." instance=ExtResource("7_ysqvs")]
+
+[node name="npc" parent="." instance=ExtResource("9_j6dwj")]
+position = Vector2(553, 333)
+
+[node name="box" parent="." instance=ExtResource("10_4aa5d")]
+position = Vector2(578, 333)
 
 [connection signal="finished" from="main_bg_audio" to="main_bg_audio" method="_on_finished"]

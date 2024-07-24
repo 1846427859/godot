@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://kmvgd7v3sxl7"]
+
+[ext_resource type="Texture2D" uid="uid://dh1ba3re53lrw" path="res://art/Ninja Adventure - Asset Pack/Items/Treasure/BigTreasureChest.png" id="1_ijxae"]
+[ext_resource type="Script" path="res://game/items/box/can_open_close.gd" id="2_cfbew"]
+[ext_resource type="Script" path="res://game/items/box/item1.gd" id="4_ckne7"]
+[ext_resource type="Texture2D" uid="uid://bpvw2byk7cxi8" path="res://art/Ninja Adventure - Asset Pack/Items/Weapons/Sword2/Sprite.png" id="4_uml8e"]
+[ext_resource type="Texture2D" uid="uid://byihll8nacvlq" path="res://art/Ninja Adventure - Asset Pack/Items/Potion/LifePot.png" id="5_l1akt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi7er"]
+size = Vector2(16, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxrm6"]
+radius = 16.0
+
+[node name="box" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ijxae")
+hframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_bi7er")
+
+[node name="can_open_close" type="Area2D" parent="."]
+script = ExtResource("2_cfbew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="can_open_close"]
+shape = SubResource("CircleShape2D_vxrm6")
+
+[node name="item_list" type="Panel" parent="."]
+visible = false
+offset_left = -31.0
+offset_top = -46.0
+offset_right = 31.0
+offset_bottom = -9.0
+
+[node name="CenterContainer" type="CenterContainer" parent="item_list"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 61.0
+offset_bottom = 36.0
+
+[node name="GridContainer" type="GridContainer" parent="item_list/CenterContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="item1" type="TextureRect" parent="item_list/CenterContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("4_uml8e")
+script = ExtResource("4_ckne7")
+
+[node name="item2" type="TextureRect" parent="item_list/CenterContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("5_l1akt")
+
+[connection signal="body_entered" from="can_open_close" to="can_open_close" method="_on_body_entered"]
+[connection signal="body_exited" from="can_open_close" to="can_open_close" method="_on_body_exited"]
+[connection signal="gui_input" from="item_list/CenterContainer/GridContainer/item1" to="item_list/CenterContainer/GridContainer/item1" method="_on_gui_input"]

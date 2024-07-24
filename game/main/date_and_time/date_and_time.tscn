@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://c13x6sxe1i5s4"]
+
+[ext_resource type="Script" path="res://game/main/date_and_time/date_and_time.gd" id="1_8h2w3"]
+
+[node name="date_and_time" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8h2w3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 27.0
+offset_right = 96.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.190761, 0.436452, 0.46871, 1)
+theme_override_font_sizes/font_size = 80
+text = "第1天 12:30"
